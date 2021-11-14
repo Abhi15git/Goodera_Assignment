@@ -14,9 +14,31 @@ res.status(201).send('success');
 })
 
 router.get('/',async function(req,res){
-   
+   if(req.query){
+       let title = req.query.title;
+       let location = req.query.location;
+
+       if(location && title){
+        let jobs = await Jobs.find({$and:[{location:{$regex: ".*" + location + ".*",$options:'i'}},{title:{$regex: ".*" + title + ".*",$options:'i'}}]}).lean().exec();
+        res.status(200).send({jobs});
+       }
+       else if(title){
+        let jobs = await Jobs.find({title:{$regex: ".*" + title + ".*",$options:'i'}}).lean().exec();
+        res.status(200).send({jobs});
+       }
+       else if(location){
+        let jobs = await Jobs.find({location:{$regex: ".*" + location + ".*",$options:'i'}}).lean().exec();
+        res.status(200).send({jobs});
+       }
+       else{
     let jobs = await Jobs.find().lean().exec();
     res.status(200).send({jobs});
+       }
+   }
+   else{
+    let jobs = await Jobs.find().lean().exec();
+    res.status(200).send({jobs});
+   }
 })
 
 router.get('/:id',async function(req,res){
