@@ -8,6 +8,20 @@ const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [err, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const findJob = (data)=>{
+    axios
+    .get(`http://localhost:8080/jobs?location=${data.location}&title=${data.title}`)
+    .then((res) => {
+      console.log(res.data.jobs);
+      setJobs(res.data.jobs)
+      setLoading(false);
+      setError(false);
+    })
+    .catch((err) => {setError("error ocuured");setLoading(false)})
+    .finally(setLoading(true));
+  }
+
   useEffect(() => {
       setLoading(true)
       setTimeout(()=>{
@@ -73,7 +87,7 @@ const Home = () => {
         </section>
       </div>
       <div className={styles.jobBox}>
-        <Search />
+        <Search find={findJob} />
         <br />
         <br />
         <br />
@@ -86,6 +100,9 @@ const Home = () => {
            loading && <h2>Loading...</h2>
         }
         <section className={styles.jobCardsContainer}>
+            {
+                !jobs.length && <h2>Sorry no result found!</h2>
+            }
           {jobs.map((items,i) => {
             return <Job data={items} key={i} />;
           })}

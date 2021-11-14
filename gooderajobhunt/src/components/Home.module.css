@@ -51,6 +51,7 @@ margin: auto;
 .jobBox{
 width: 75%;
 margin: -30px auto 0px auto;
+min-height: 70vh;
 height: 100%;
 }
 
@@ -71,6 +72,23 @@ justify-content: space-between;
     display: flex;
     align-items: center;
 }
+.searchBar button{
+    width: 200px;
+    color: white;
+    background-color: #F07987;
+}
+.searchBar svg{
+    width: 8%;
+}
+.searchBar input{
+    border: none;
+}
+.searchBar select{
+    color: grey;
+    width: 200px;
+ border: none;
+}
+
 .jobCardsContainer{
     width: 100%;
     display: grid;
@@ -108,4 +126,5 @@ width: 100%;
 }
 .description button{
     float: right;
+    text-transform: none;
 }
