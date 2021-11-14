@@ -11,7 +11,7 @@ instructions:
 
 use "http://localhost:8080/jobs" to post data
 
-##Sample data(provided in the Backend folder as "data.json")
+Sample data(provided in the Backend folder as "data.json")
 
 OR here
 
